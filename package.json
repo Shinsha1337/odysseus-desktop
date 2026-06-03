@@ -1,0 +1,15 @@
+{
+  "name": "odysseus-desktop",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Lightweight Tauri desktop shell that runs and manages the local Odysseus server.",
+  "scripts": {
+    "icons": "node make-icon.js && tauri icon app-icon.png",
+    "dev": "tauri dev",
+    "build": "tauri build",
+    "tauri": "tauri"
+  },
+  "devDependencies": {
+    "@tauri-apps/cli": "^2.1.0"
+  }
+}

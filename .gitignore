@@ -1,0 +1,21 @@
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+node_modules
+*.local
+
+# Editor
+.vscode/*
+.idea
+.DS_Store
+*.suo
+*.sw?
+
+# Generatable
+app-icon.png
+src-tauri/icons/
+src-tauri/gen/
+src-tauri/target/

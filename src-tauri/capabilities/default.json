@@ -1,0 +1,10 @@
+{
+  "$schema": "../gen/schemas/desktop-schema.json",
+  "identifier": "default",
+  "description": "Capabilities for the Odysseus desktop launcher page. By default these only apply to the bundled local frontend (http://tauri.localhost) — once the webview navigates to the running server (http://127.0.0.1:7000) it has a different origin and Tauri IPC is unavailable, which is the secure default.",
+  "windows": ["main"],
+  "permissions": [
+    "core:default",
+    "dialog:default"
+  ]
+}

@@ -1,0 +1,311 @@
+:root {
+  --bg: #282c34;
+  --bg-2: #111111;
+  --line: #355a66;
+  --text: #9cdef2;
+  --muted: #6a8a9e;
+  --accent: #e06c75;
+  --accent-hi: #e88790;
+  --accent-fg: #ffffff;
+  --green: #3ecf8e;
+  --amber: #e7b94c;
+  --red: #e06c75;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  font-size: 14px;
+  user-select: none;
+}
+
+#content {
+  position: relative;
+  height: 100%;
+  background: var(--bg);
+}
+
+#overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(
+    circle at 50% 38%,
+    color-mix(in srgb, var(--accent) 20%, var(--bg)),
+    var(--bg) 70%
+  );
+}
+.overlay-card {
+  text-align: center;
+  max-width: 520px;
+  padding: 24px;
+}
+.overlay-logo {
+  width: 76px;
+  height: 76px;
+  margin: 0 auto 14px;
+  color: var(--accent);
+  filter: drop-shadow(0 0 22px color-mix(in srgb, var(--accent) 55%, transparent));
+}
+.overlay-logo svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.overlay-card h1 {
+  font-size: 20px;
+  margin: 8px 0;
+}
+.overlay-card p {
+  color: var(--muted);
+  margin: 0 0 18px;
+}
+.overlay-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.icon-btn,
+.server-btn,
+.primary,
+.ghost {
+  font: inherit;
+  cursor: pointer;
+  border: none;
+  color: var(--text);
+  background: transparent;
+  border-radius: 6px;
+}
+.icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 28px;
+  color: var(--muted);
+  line-height: 1;
+}
+.icon-btn:hover {
+  background: color-mix(in srgb, var(--text) 12%, transparent);
+  color: var(--text);
+}
+.server-btn {
+  padding: 9px 20px;
+  background: transparent;
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  font-weight: 600;
+}
+.server-btn:hover {
+  background: color-mix(in srgb, var(--accent) 14%, transparent);
+}
+.server-btn.danger {
+  border-color: color-mix(in srgb, var(--text) 35%, transparent);
+  color: var(--text);
+}
+.server-btn.danger:hover {
+  background: color-mix(in srgb, var(--text) 12%, transparent);
+}
+.server-btn:disabled {
+  opacity: 0.55;
+  cursor: default;
+}
+.primary {
+  padding: 9px 20px;
+  background: var(--accent);
+  color: var(--accent-fg);
+  font-weight: 600;
+}
+.primary:hover {
+  background: var(--accent-hi);
+}
+.primary:disabled {
+  opacity: 0.55;
+  cursor: default;
+}
+.ghost {
+  padding: 8px 14px;
+  color: var(--muted);
+}
+.ghost:hover {
+  color: var(--text);
+  background: transparent;
+}
+
+#logBox {
+  margin-top: 16px;
+  text-align: left;
+  background: color-mix(in srgb, var(--bg) 82%, #000);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 12px;
+  height: 220px;
+  overflow: auto;
+  font-family: "Cascadia Code", "Consolas", monospace;
+  font-size: 12px;
+  color: color-mix(in srgb, var(--text) 88%, var(--bg));
+  white-space: pre-wrap;
+  user-select: text;
+  scrollbar-width: thin;
+  scrollbar-color: var(--accent) transparent;
+}
+#logBox::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+#logBox::-webkit-scrollbar-track {
+  background: transparent;
+}
+#logBox::-webkit-scrollbar-thumb {
+  background: var(--accent);
+  border-radius: 999px;
+  border: 3px solid transparent;
+  background-clip: padding-box;
+}
+#logBox::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-hi);
+  background-clip: padding-box;
+}
+#logBox::-webkit-scrollbar-button {
+  display: none;
+  width: 0;
+  height: 0;
+}
+#logBox::-webkit-scrollbar-corner {
+  background: transparent;
+}
+.hidden {
+  display: none !important;
+}
+
+#settings {
+  position: absolute;
+  inset: 0;
+  background: color-mix(in srgb, var(--bg) 62%, transparent);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 16px;
+  overflow: auto;
+  z-index: 20;
+}
+.settings-card {
+  width: 100%;
+  max-width: 560px;
+  background: var(--bg-2);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 20px 22px 24px;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.45);
+}
+.settings-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+.settings-head h2 {
+  margin: 0;
+  font-size: 17px;
+}
+.field {
+  display: block;
+  margin-bottom: 16px;
+}
+.field > span {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--muted);
+  font-size: 12.5px;
+}
+.field-row {
+  display: flex;
+  gap: 14px;
+}
+.field.narrow {
+  width: 120px;
+  flex: none;
+}
+.field-row .field {
+  flex: 1;
+}
+input[type="text"],
+input[type="number"] {
+  width: 100%;
+  padding: 9px 11px;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  color: var(--text);
+  font: inherit;
+  user-select: text;
+}
+input:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+input[type="number"] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  appearance: none;
+  margin: 0;
+}
+.path-row {
+  display: flex;
+  gap: 8px;
+}
+.path-row input {
+  flex: 1;
+}
+.hint {
+  display: block;
+  margin-top: 6px;
+  font-size: 12px;
+  color: var(--muted);
+}
+.hint.ok {
+  color: var(--green);
+}
+.hint.bad {
+  color: var(--red);
+}
+.check {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  color: var(--text);
+  font-size: 13px;
+  margin: 4px 0 20px;
+  cursor: pointer;
+}
+.check input[type="checkbox"] {
+  margin-top: 1px;
+  width: 16px;
+  height: 16px;
+  accent-color: var(--accent);
+  cursor: pointer;
+  flex: none;
+}
+.settings-actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}

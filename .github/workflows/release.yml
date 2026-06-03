@@ -1,0 +1,57 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-windows:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Setup Rust (stable)
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Cache cargo registry / target
+        uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: src-tauri
+
+      - name: Install JS dependencies
+        run: npm ci
+
+      - name: Generate icons
+        run: npm run icons
+
+      - name: Build installers (NSIS + MSI)
+        run: npm run build
+
+      - name: Rename artifacts to stable names
+        shell: pwsh
+        run: |
+          $bundle = "src-tauri/target/release/bundle"
+          New-Item -ItemType Directory -Force -Path "release-artifacts" | Out-Null
+          $nsis = Get-ChildItem "$bundle/nsis/*-setup.exe" | Select-Object -First 1
+          $msi  = Get-ChildItem "$bundle/msi/*.msi"        | Select-Object -First 1
+          if ($nsis) { Copy-Item $nsis.FullName "release-artifacts/odysseus-desktop-windows-x64-setup.exe" }
+          if ($msi)  { Copy-Item $msi.FullName  "release-artifacts/odysseus-desktop-windows-x64-setup.msi" }
+          Get-ChildItem release-artifacts
+
+      - name: Publish to GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: release-artifacts/*
+          draft: true
+          generate_release_notes: true
