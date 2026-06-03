@@ -1,11 +1,10 @@
 # Odysseus Desktop
 
-<img width="1354" height="947" alt="odysseus-desktop" src="https://github.com/user-attachments/assets/f22dd851-710b-40e7-849b-c91505b1e1cd" />
-
 Desktop app wrapper for the [Odysseus](https://github.com/pewdiepie-archdaemon/odysseus) self-hosted AI workspace by PewDiePie (Felix Kjellberg).
 
 Built with [Tauri](https://tauri.app) — lightweight, no Electron.
 
+<img width="1354" height="947" alt="odysseus-desktop" src="https://github.com/user-attachments/assets/f22dd851-710b-40e7-849b-c91505b1e1cd" />
 ---
 
 ## Download
